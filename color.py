@@ -5,6 +5,9 @@ b = ["#A32523","#515594","#1C6B65","#AFC900"]
 c = ["+",">",".","["]
 d = ["-","<",",","]"]
 
+e = {'+': [0,0], '-': [1,0], '>': [0,1], '<': [1,1], '.': [0,2], ',': [1,2], '[': [0,3], ']': [1,3]}
+f = {'[0, 0]': '+', '[1, 0]': '-', '[0, 1]': '>', '[1, 1]': '<', '[0, 2]': '.', '[1, 2]': ',', '[0, 3]': '[', '[1, 3]': ']'}
+
 white = "#FFFFFF"
 black = "#000000"
 
@@ -33,7 +36,7 @@ def color_change(c1,c2):
             i = b.index(c1)
             j = a.index(c2) + 4
             color = (j - i)%4
-    return [color,hue]
+    return [hue,color]
 
 
 def symbol_change(c1,c2):
@@ -64,30 +67,18 @@ def symbol_change(c1,c2):
     return [color,hue]
 
 def color_to_symbol(foo):
-    color = "#DC322F"
-    symbol = "+"
+    i = 0
     zz = []
-    yy = []
-    for i in foo:
-        zz.append(color_change(color,i))
-        color = i
-    for i in zz:
-        for j in (c+d):
-            if symbol_change(symbol,j) == i:
-                yy.append(j)
-                symbol = j
-                break
-    return yy
+    zz.append(color_change('#DC322F',foo[0]))
+    while( i < len(foo)-1):
+        zz.append(color_change(foo[i],foo[i+1]))
+        i = i+1
+    return zz
 
 def symbol_to_color(foo):
-    symbol = "+"
     color = "#DC322F"
-    zz = []
     yy = []
     for i in foo:
-        zz.append(symbol_change(symbol,i))
-        symbol = i
-    for i in zz:
         for j in (a+b):
             if color_change(color,j) == i:
                 yy.append(j)
