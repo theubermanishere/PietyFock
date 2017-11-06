@@ -1,2 +1,2 @@
 # PietyFock
-A combination language between brainfuck and Piet
+A combination language between brainfock and Piet

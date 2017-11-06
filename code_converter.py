@@ -8,6 +8,9 @@ def cleanup(code):
   return ''.join(filter(lambda x: x in ['.', ',', '[', ']', '<', '>', '+', '-'], code))
 
 f = open(sys.argv[1],'r')
+img_file = 'aa.png'
+if len(sys.argv) > 2:
+    img_file = sys.argv[2]
 sourcecode = f.read()
 source = list(cleanup(sourcecode))
 
@@ -15,7 +18,6 @@ source = list(cleanup(sourcecode))
 zz = []
 for i in source:
     zz.append(color.e[i])
-print(zz)
 
 yy = color.symbol_to_color(zz)
 
@@ -34,11 +36,9 @@ img = Image.new('RGBA', (width,height), 'black')
 
 draw = ImageDraw.Draw(img)
 
-print(len(yy))
-print(len(loci))
-
 for i in range(len(yy)):
     draw.rectangle([loci[i][1]*50,loci[i][0]*50,(loci[i][1]+1)*50,(loci[i][0]+1)*50], yy[i])
 
-img.save('aa.png')
+img.save(img_file)
+print("Image saved as {}".format(img_file))
 

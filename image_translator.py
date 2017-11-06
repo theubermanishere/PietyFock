@@ -3,10 +3,8 @@ from PIL import Image, ImageDraw
 import path
 import color
 import sys
-import brainfuck as brain
+import brain
 
-sourcecode = "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++."
-source = list(sourcecode)
 
 img = Image.open(sys.argv[1])
 
@@ -31,4 +29,4 @@ fin = []
 for i in color.color_to_symbol(zz):
     fin.append(color.f[str(i)])
 
-print(brain.evaluate(''.join(fin)))
+print(brain.evaluate(''.join(fin[:])))
